@@ -57,6 +57,9 @@ public class SportsCacheService {
 
 	/*
 	 * this function is called by the scheduler to update real time cache
+	 * if not present in new data, invalidate from cache using odds key
+	 * else
+	 * update existing cache using odds key
 	 */
 	public void updateCacheRealtime(final List<OddsData> oddsDataList) {
 		final Map<Object, Object> cache = this.getCacheMap();
@@ -94,7 +97,7 @@ public class SportsCacheService {
 	 * given list of two sites, check each element present in the other, if not return immediatly.
 	 * O(n^2) operation
 	 */
-	public boolean isSitesSame(final List<Site> sitea, final List<Site> siteb) {
+	private boolean isSitesSame(final List<Site> sitea, final List<Site> siteb) {
 		if (sitea.size() != siteb.size()) {
 			return false;
 		}

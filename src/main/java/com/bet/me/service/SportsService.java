@@ -73,7 +73,7 @@ public class SportsService {
 	
 	public void updateCacheRealtime() {
 		final List<OddsData> oddsDataList = this.getOddsData("upcoming", "uk", "h2h");
-		
+		this.sportsCacheService.updateCacheRealtime(oddsDataList);
 		
 	}
 

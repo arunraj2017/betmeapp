@@ -47,7 +47,7 @@ public class Test {
 		List<Site> siteA = Arrays.asList(site1, site4, site3);
 		List<Site> siteB = Arrays.asList(site1, site2, site3);
 		
-		System.out.println(scs.isSitesSame(siteA, siteB));
+		//System.out.println(scs.isSitesSame(siteA, siteB));
 
 	}
 
