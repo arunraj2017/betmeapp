@@ -39,7 +39,11 @@ public class SportsService {
 	 */
 	public List<Sport> getAllSports() {
 		logger.info("calling the api to get sports data");
-		return sportsClient.getSportsResponse().data;
+		final ApiResponse<Sport> apiResponse = this.sportsClient.getSportsResponse();
+		if (!apiResponse.success) {
+			throw new BetMeApiException("failure from api");
+		}
+		return apiResponse.getData();
 	}
 
 	/*
@@ -55,11 +59,22 @@ public class SportsService {
 
 	public void getUpcomingMatches() {
 		final List<OddsData> oddsDataList = this.getOddsData("upcoming", "uk", "h2h");
-		oddsDataList.forEach(odds -> this.sportsCacheService.cacheOddsData(odds));
+		oddsDataList.forEach(this.sportsCacheService::cacheOddsData);
 	}
 	
 	public List<OddsData> getCachedOddsData() {
 		return this.sportsCacheService.getCachedOddsData();
+	}
+	
+	public List<OddsData> getCachedSportOddsData(final String sportsKey) {
+		return this.sportsCacheService.getCachedSportsOddsData(sportsKey);	
+	}
+	
+	
+	public void updateCacheRealtime() {
+		final List<OddsData> oddsDataList = this.getOddsData("upcoming", "uk", "h2h");
+		
+		
 	}
 
 	

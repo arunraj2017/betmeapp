@@ -65,6 +65,7 @@ public class OddsData implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	/* Not doing complex equals operation here as it might affect performance dealing with large objects*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

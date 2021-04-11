@@ -33,6 +33,36 @@ public class Site implements Serializable{
 	public void setOdds(Odds odds) {
 		this.odds = odds;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((last_update == null) ? 0 : last_update.hashCode());
+		result = prime * result + ((site_key == null) ? 0 : site_key.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Site other = (Site) obj;
+		if (last_update == null) {
+			if (other.last_update != null)
+				return false;
+		} else if (!last_update.equals(other.last_update))
+			return false;
+		if (site_key == null) {
+			if (other.site_key != null)
+				return false;
+		} else if (!site_key.equals(other.site_key))
+			return false;
+		return true;
+	}
 	
 	
 

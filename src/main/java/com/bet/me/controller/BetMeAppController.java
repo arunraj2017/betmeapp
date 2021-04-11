@@ -40,4 +40,11 @@ public class BetMeAppController {
 		final List<OddsData> response = sportsService.getCachedOddsData();
 		return response;
 	}
+	@GetMapping("/v1/getodds")
+	public List<OddsData> getOdds(
+			@RequestParam(required = true, name = "sport") String sportKey
+			) {
+		final List<OddsData> response = sportsService.getCachedSportOddsData(sportKey);
+		return response;
+	}
 }
