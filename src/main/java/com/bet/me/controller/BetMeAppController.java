@@ -25,13 +25,19 @@ public class BetMeAppController {
 		return response;
 	}
 	
-	@GetMapping("/v1/getOdds")
+	@GetMapping("/v1/getodds")
 	public List<OddsData> getOdds(
 			@RequestParam(required = true, name = "sport") String sport,
 			@RequestParam(required = true, name = "region") String region,
 			@RequestParam(required = true, name = "mkt") String mkt
 			) {
 		final List<OddsData> response = sportsService.getOddsData(sport, region, mkt);
+		return response;
+	}
+	
+	@GetMapping("/v1/getcache")
+	public List<OddsData> getOdds() {
+		final List<OddsData> response = sportsService.getCachedOddsData();
 		return response;
 	}
 }

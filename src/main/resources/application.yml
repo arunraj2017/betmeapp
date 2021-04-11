@@ -11,3 +11,6 @@ betmeapp:
      url: /v3/sports/?apiKey=${apiKey}
    odds:
      url: /v3/odds/?apiKey=${apiKey}
+     
+logging:  level:    com.bet.me: info
+    org.springframework.cache: TRACE
