@@ -13,6 +13,7 @@ import com.mongodb.client.MongoClients;
 @Configuration
 public class MongoConfiguration {
 
+	//eg: mongodb://localhost:27017/test
 	@Value("${connection}")
 	private String mongoConnectionString;
 
