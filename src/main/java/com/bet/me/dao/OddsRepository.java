@@ -8,5 +8,6 @@ import com.bet.me.model.OddsData;
 @Repository
 
 public interface OddsRepository extends MongoRepository<OddsData, String> {
+	
 
 }

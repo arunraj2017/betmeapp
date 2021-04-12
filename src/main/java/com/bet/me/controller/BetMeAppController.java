@@ -21,26 +21,27 @@ public class BetMeAppController {
 
 	@GetMapping("/v1/getallsports")
 	public List<Sport> getAllSports() {
-		final List<Sport> response = sportsService.getAllSports();
+		final List<Sport> response = sportsService.getAllSportsFromDb();
 		return response;
 	}
 	
-	@GetMapping("/v1/getodds")
+	/*as of now only UK data is being cached because of api rate limits*/
+	@GetMapping("/v1/getoddsquery")
 	public List<OddsData> getOdds(
 			@RequestParam(required = true, name = "sport") String sport,
 			@RequestParam(required = true, name = "region") String region,
 			@RequestParam(required = true, name = "mkt") String mkt
 			) {
-		final List<OddsData> response = sportsService.getOddsData(sport, region, mkt);
+		final List<OddsData> response = sportsService.getOddsDataFromDb();
 		return response;
 	}
 	
-	@GetMapping("/v1/getcache")
+	@GetMapping("/v1/getupcoming")
 	public List<OddsData> getOdds() {
 		final List<OddsData> response = sportsService.getCachedOddsData();
 		return response;
 	}
-	@GetMapping("/v1/getodds")
+	@GetMapping("/v1/getupcomingsport")
 	public List<OddsData> getOdds(
 			@RequestParam(required = true, name = "sport") String sportKey
 			) {

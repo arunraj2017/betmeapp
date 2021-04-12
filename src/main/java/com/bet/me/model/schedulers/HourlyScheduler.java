@@ -30,7 +30,7 @@ public class HourlyScheduler {
 		this.gameRepo = gameRepo;
 	}
 
-	@Scheduled(fixedDelay = 60 * 60 * 1000)
+	@Scheduled(fixedDelay = 60 * 60 * 1000, initialDelay=60000)
 	public void runHourlyScheduler() {
 		//gets the dat from the DB
 		final List<Sport> sports = this.gameRepo.findAll();

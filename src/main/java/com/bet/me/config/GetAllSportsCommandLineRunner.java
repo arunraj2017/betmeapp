@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.bet.me.dao.GameRepository;
@@ -16,7 +15,6 @@ import com.bet.me.model.Sport;
 import com.bet.me.service.SportsService;
 
 @Configuration
-@Transactional
 public class GetAllSportsCommandLineRunner implements CommandLineRunner {
 	Logger logger = LoggerFactory.getLogger(GetAllSportsCommandLineRunner.class);
 
@@ -42,12 +40,10 @@ public class GetAllSportsCommandLineRunner implements CommandLineRunner {
 		}
 		
 		this.gameRepo.saveAll(sports);
-			  sports.forEach(sprt -> { 
+			 sports.forEach(sprt -> { 
 				  final List<OddsData> oddsData =this.sportsService.getOddsData(sprt.getKey(), "uk", "h2h");
 				  this.oddsRepo.saveAll(oddsData);
 			  });
-			 
-		
 		
 		
 	}
