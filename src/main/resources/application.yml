@@ -1,6 +1,7 @@
 spring:
   application:
     name: betmeapp
+
 server:  servlet:    context-path: /betmeapp
     
     

@@ -2,10 +2,15 @@ package com.bet.me.model;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Sport implements Serializable {
 	
 
 	private static final long serialVersionUID = 1L;
+	@Id
 	private String key;
 	private boolean active;
 	private String group;

@@ -6,32 +6,48 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import com.bet.me.dao.GameRepository;
+import com.bet.me.dao.OddsRepository;
+import com.bet.me.model.OddsData;
 import com.bet.me.model.Sport;
 import com.bet.me.service.SportsService;
 
 @Configuration
-public class GetAllSportsCommandLineRunner  implements CommandLineRunner{
+@Transactional
+public class GetAllSportsCommandLineRunner implements CommandLineRunner {
 	Logger logger = LoggerFactory.getLogger(GetAllSportsCommandLineRunner.class);
-	
+
 	private final SportsService sportsService;
-	public GetAllSportsCommandLineRunner(final SportsService sportsService) {
+	private final GameRepository gameRepo;
+	private final OddsRepository oddsRepo;
+
+	public GetAllSportsCommandLineRunner(final SportsService sportsService,
+			final GameRepository gameRepo,
+			final OddsRepository oddsRepo) {
 		this.sportsService = sportsService;
+		this.gameRepo = gameRepo;
+		this.oddsRepo = oddsRepo; 
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info("APP START - Populating the sports database");
 		final List<Sport> sports = sportsService.getAllSports();
-		//TODO: need to save this data to DB
-		if(!CollectionUtils.isEmpty(sports)) {
-			/*
-			 * sports.forEach(sprt -> { final List<OddsData> oddsData =
-			 * this.sportsService.getOddsData(sprt.getKey(), "uk", "h2h"); //TODO: need to
-			 * save this to DB });
-			 */
+		if(CollectionUtils.isEmpty(sports)) {
+		logger.warn("Api returned empty collection");
+			return;
 		}
+		
+		this.gameRepo.saveAll(sports);
+			  sports.forEach(sprt -> { 
+				  final List<OddsData> oddsData =this.sportsService.getOddsData(sprt.getKey(), "uk", "h2h");
+				  this.oddsRepo.saveAll(oddsData);
+			  });
+			 
+		
 		
 		
 	}

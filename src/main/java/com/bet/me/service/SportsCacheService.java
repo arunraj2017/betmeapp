@@ -12,15 +12,18 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
+import com.bet.me.dao.OddsRepository;
 import com.bet.me.model.OddsData;
 import com.bet.me.model.Site;
 
 @Service
 public class SportsCacheService {
 	private final CacheManager cacheManager;
+	private final OddsRepository oddsRepo;
 
-	public SportsCacheService(final CacheManager cacheManager) {
+	public SportsCacheService(final CacheManager cacheManager, final OddsRepository oddsRepo) {
 		this.cacheManager = cacheManager;
+		this.oddsRepo = oddsRepo;
 	}
 
 	@CachePut(value = "odds-data", key = "#oddsData.id")
@@ -72,7 +75,7 @@ public class SportsCacheService {
 			if (oddA.isPresent()) {
 				if (!this.isSitesSame(oddA.get().getSites(), oddC.getSites())) {
 					this.getCache().put(oddA.get().getId(), oddA);
-					// TODO: update to DB
+					this.oddsRepo.save(oddA.get());
 				}
 
 			} else {

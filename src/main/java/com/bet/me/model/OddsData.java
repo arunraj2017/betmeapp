@@ -3,9 +3,14 @@ package com.bet.me.model;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class OddsData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
 	private String id;
 	private String sport_key;
 	private String sport_nice;
