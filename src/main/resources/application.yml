@@ -13,7 +13,7 @@ betmeapp:
    odds:
      url: /v3/odds/?apiKey=${apiKey}
    realtime:
-     delayms: 300000 #5 min
+     delayms: ${realtimedelayms}
      
 logging:  level:    com.bet.me: info
     org.springframework.cache: TRACE

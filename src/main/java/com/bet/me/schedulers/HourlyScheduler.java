@@ -1,4 +1,4 @@
-package com.bet.me.model.schedulers;
+package com.bet.me.schedulers;
 
 import java.util.List;
 

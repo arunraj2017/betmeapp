@@ -1,4 +1,4 @@
-package com.bet.me.model.schedulers;
+package com.bet.me.schedulers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
